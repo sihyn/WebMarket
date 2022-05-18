@@ -23,7 +23,7 @@
 	String greeting = "Welcome to Web Shopping Mall";
 	String tagline = "Welcome to Web Maket!";%>
 
-	<div class="mt-4 p-5 bg-primary text-white">
+	<div class=" p-5 bg-primary text-white">
 		<div class="container">
 			<h2 class="display-3">
 				<%=greeting%></h2>
