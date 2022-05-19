@@ -46,6 +46,9 @@
 	       <%= tagline %>
 	    </h3>
 	    <%
+	    //10초마다 새로고침
+	    response.setIntHeader("Refresh", 10);
+	    
 	    Date today = new Date();
 	    
 	    SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
