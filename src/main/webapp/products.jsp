@@ -43,6 +43,10 @@ List<Product> products = repository.getAllProducts();
     	<h3><%= product.getName() %></h3>
     	<p><%= product.getDescription() %></p>
     	<p><%= product.getUnitPrice() %>원</p>
+    	<!-- 누르면 상품정보 페이지 -->
+    	<p><a class = "btn btn-secondary" role = "button" href="./product.jsp?id=<%=product.getProductId()%>">
+    		상세 정보 &raquo;
+    	</a></p>
     	</div>
     	<%
     	}

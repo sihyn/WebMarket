@@ -45,4 +45,14 @@ public class ProductRepository {
 	public List<Product> getAllProducts() {
 		return products;
 	}
+	
+	//상품 ID로 상춤 찾기
+	public Product getProductByID(String productId) {
+		//원래 코드는 책 p.173 참고
+		return products.stream() //상품3개가 흘러간다
+				//하나씩 조건대로 거른다
+				.filter((product) -> product.getProductId().equals(productId)) //필요한 것 거르기
+				.findFirst() //첫번째 거 찾기
+				.get(); //얻기
+	}
 }
