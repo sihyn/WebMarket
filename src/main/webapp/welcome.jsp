@@ -1,7 +1,10 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dto.Product" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +14,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand navbar-dark bg-dark">
-	  <div class="container">
-	    <div class="navbar-header">
-	       <a class="navbar-brand" href="./welcome.jsp">Home</a>
-        </div>
-	  </div>
-	</nav>
+	<jsp:include page="menu.jsp" />
     <%!
     // 변수, 메서드 선언
     String greeting = "웹 쇼핑몰에 오신 것을 환영합니다";
@@ -46,20 +43,31 @@
 	       <%= tagline %>
 	    </h3>
 	    <%
-	    //10초마다 새로고침
-	    response.setIntHeader("Refresh", 10);
+	    // 1초에 한번씩 새로고침
+	    response.setIntHeader("Refresh", 5);
 	    
 	    Date today = new Date();
 	    
 	    SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
 	    
 	    out.println("현재 접속 시간: " + format.format(today));
+	    
+	    session.setAttribute("name", "김시현");
+	    session.setAttribute("age", 23);
+	    
+	    List<String> foods = new ArrayList<>();
+	    foods.add("짜장면");
+	    foods.add("라면");
+	    foods.add("탕수육");
+	    
+	    session.setAttribute("food", foods);
+	    session.setMaxInactiveInterval(5);
+	    
 	    %>
 	  </div>
 	</div>
 	
-	<footer class="container">
-	   <p>&copy; WebMarket</p>
-	</footer>
+	<jsp:include page="footer.jsp" />
+	
 </body>
 </html>

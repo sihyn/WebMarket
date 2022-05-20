@@ -1,58 +1,59 @@
-package dao;
+package dao; 
 
 import java.util.ArrayList;
 import java.util.List;
 import dto.Product;
 
-//product에 대한 기능을 정의
 public class ProductRepository {
 	private List<Product> products = new ArrayList<>();
-	// List는 인터페이스 ArrayList는 클래스
-	// 다형성을 위해서 List로 하여 뒤에 어떤 리스트 종류가 와도 다 가능하게 함(여기서는 ArrayList)
-
-	// 기본 생성자
+	private static ProductRepository instance = new ProductRepository();
+	public static ProductRepository getInstance() {
+		return instance;
+	}
+	
 	public ProductRepository() {
-		// 원래는 DB에서 가져올 데이터 이지만
-		// 지금 DB 사용하지 않고 그냥 3개 만듦
 		Product phone = new Product("P1234", "iphone 6s", 800000);
-		phone.setDescription("4.7-inch, 1334X750 Retina HD display, more");
+		phone.setDescription("4.7-inch, 1334X750 Retina HD display, 8-megapixel iSight Camara");
 		phone.setCategory("Smart Phone");
 		phone.setManufacturer("Apple");
 		phone.setUnitInStock(1000);
 		phone.setCondition("New");
-
-		Product notebook = new Product("P1235", "LG Gram", 1500000);
-		notebook.setDescription("4.7-inch, 1334X750 Retina HD display, more");
-		notebook.setCategory("Smart notebook");
+		
+		Product notebook = new Product("P1235", "LG PC 그램", 1500000);
+		notebook.setDescription("13.3inch, IPS LED display, 5th Generation Intel Core processors");
+		notebook.setCategory("Notebook");
 		notebook.setManufacturer("LG");
 		notebook.setUnitInStock(1000);
-		notebook.setCondition("Refublished");
-
-		Product tablet = new Product("P1236", "Galaxy Tab S", 1000000);
-		tablet.setDescription("4.7-inch, 1334X750 Retina HD display, more");
-		tablet.setCategory("Smart Tablet");
+		notebook.setCondition("Refurbished");
+		
+		Product tablet = new Product("P1236", "Galaxy Tab S", 900000);
+		tablet.setDescription("212.8*125.6*6.6mm, Super AMOLED display, Octa-Core processor");
+		tablet.setCategory("Tablet");
 		tablet.setManufacturer("Samsung");
 		tablet.setUnitInStock(1000);
 		tablet.setCondition("Old");
-
-		// List에 넣음
+		
 		products.add(phone);
 		products.add(notebook);
 		products.add(tablet);
 	}
-
-	// 모든 상품 정보 가져옴
+	
 	public List<Product> getAllProducts() {
 		return products;
+		
 	}
 	
-	//상품 ID로 상춤 찾기
-	public Product getProductByID(String productId) {
-		//원래 코드는 책 p.173 참고
-		return products.stream() //상품3개가 흘러간다
-				//하나씩 조건대로 거른다
-				.filter((product) -> product.getProductId().equals(productId)) //필요한 것 거르기
-				.findFirst() //첫번째 거 찾기
-				.get(); //얻기
+	public Product getProductById(String ProductId) {
+		return products.stream() 
+				.filter((product)->product.getProductId().equals(ProductId))
+				// 필요한 것 거르기 (filter가 하나씩 돌림)
+				.findFirst()	// 그 중 첫 번째 것 찾기
+				.get(); 		// 찾은 값 얻어오기	
 	}
+	
+	// 상품 추가
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+	
 }
