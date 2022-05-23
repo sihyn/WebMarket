@@ -5,9 +5,8 @@
 <%
 // 한글 안 깨지게
 //request.setCharacterEncoding("UTF-8");
-String task = request.getParameter("task");
-Todo todo = new Todo(task);
+long id = Long.parseLong(request.getParameter("id"));
 TodoRepository repository = TodoRepository.getInstance();
-repository.addTodo(todo);
+repository.toggle(id);
 response.sendRedirect("todolist.jsp");
 %>
